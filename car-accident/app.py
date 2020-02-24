@@ -2,6 +2,13 @@ import cv2
 import numpy as np
 import argparse
 
+# SIMPLE IMAGE
+# ./darknet detector test cfg/coco.data cfg/yolov3.cfg yolov3.weights data/dog.jpg
+# REAL TIME
+# ./darknet detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights
+# VIDEO FILE
+# ./darknet detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights <video file>
+
 IMAGE_PATH="IMAGE_PATH"
 CFG_FILE="CFG_FILE"
 WEIGHT_FILE="WEIGHT_FILE"
