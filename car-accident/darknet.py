@@ -32,6 +32,9 @@ import math
 import random
 import os
 
+DARKNET_FORCE_CPU=False
+FORCE_CPU=False
+
 def sample(probs):
     s = sum(probs)
     probs = [a/s for a in probs]
@@ -97,7 +100,7 @@ if os.name == "nt":
                 if int(os.environ['CUDA_VISIBLE_DEVICES']) < 0:
                     raise ValueError("ForceCPU")
             try:
-                global DARKNET_FORCE_CPU
+                # global DARKNET_FORCE_CPU
                 if DARKNET_FORCE_CPU:
                     raise ValueError("ForceCPU")
             except NameError:
