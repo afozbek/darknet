@@ -31,7 +31,9 @@ from ctypes import *
 import math
 import random
 import os
+import cv2
 
+print(cv2.__version__)
 DARKNET_FORCE_CPU=False
 FORCE_CPU=False
 
@@ -105,7 +107,7 @@ if os.name == "nt":
                     raise ValueError("ForceCPU")
             except NameError:
                 pass
-            # print(os.environ.keys())
+            print(os.environ.keys())
             # print("FORCE_CPU flag undefined, proceeding with GPU")
         if not os.path.exists(winGPUdll):
             raise ValueError("NoDLL")
@@ -443,8 +445,10 @@ def performDetect(
                 draw.set_color(image, (rr4, cc4), boxColor, alpha= 0.8)
                 draw.set_color(image, (rr5, cc5), boxColor, alpha= 0.8)
             if not makeImageOnly:
-                io.imshow(image)
-                io.show()
+                cv2.imshow("frame", image)
+                cv2.waitKey(0)
+                # io.imshow(image)
+                # io.show()
             detections = {
                 "detections": detections,
                 "image": image,
@@ -455,4 +459,4 @@ def performDetect(
     return detections
 
 if __name__ == "__main__":
-    print(performDetect())
+    performDetect()
