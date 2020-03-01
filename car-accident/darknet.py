@@ -63,7 +63,6 @@ class DETECTION(Structure):
                 ("uc", POINTER(c_float)),
                 ("points", c_int)]
 
-
 class IMAGE(Structure):
     _fields_ = [("w", c_int),
                 ("h", c_int),
@@ -74,9 +73,7 @@ class METADATA(Structure):
     _fields_ = [("classes", c_int),
                 ("names", POINTER(c_char_p))]
 
-
-
-#lib = CDLL("/home/pjreddie/documents/darknet/libdarknet.so", RTLD_GLOBAL)
+#lib = CDLL("~/Desktop/libdarknet.so", RTLD_GLOBAL)
 #lib = CDLL("libdarknet.so", RTLD_GLOBAL)
 hasGPU = True
 if os.name == "nt":
@@ -126,6 +123,7 @@ lib.network_width.argtypes = [c_void_p]
 lib.network_width.restype = c_int
 lib.network_height.argtypes = [c_void_p]
 lib.network_height.restype = c_int
+print("LIBRARY: ", lib)
 
 copy_image_from_bytes = lib.copy_image_from_bytes
 copy_image_from_bytes.argtypes = [IMAGE,c_char_p]
@@ -297,12 +295,20 @@ def detect_image(net, meta, im, thresh=.5, hier_thresh=.5, nms=.45, debug= False
     if debug: print("freed detections")
     return res
 
-
 netMain = None
 metaMain = None
 altNames = None
 
-def performDetect(imagePath="data/dog.jpg", thresh= 0.25, configPath = "./cfg/yolov3.cfg", weightPath = "yolov3.weights", metaPath= "./cfg/coco.data", showImage= True, makeImageOnly = False, initOnly= False):
+def performDetect(
+    imagePath="data/dog.jpg",
+    thresh = 0.25,
+    configPath = "./cfg/yolov3.cfg",
+    weightPath = "yolov3.weights",
+    metaPath = "./cfg/coco.data",
+    showImage = True,
+    makeImageOnly = False,
+    initOnly = False
+    ):
     """
     Convenience function to handle the detection and returns of objects.
 

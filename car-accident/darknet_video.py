@@ -40,20 +40,16 @@ altNames = None
 
 
 def YOLO():
-
     global metaMain, netMain, altNames
     configPath = "./cfg/yolov3.cfg"
     weightPath = "./yolov3.weights"
     metaPath = "./cfg/coco.data"
     if not os.path.exists(configPath):
-        raise ValueError("Invalid config path `" +
-                         os.path.abspath(configPath)+"`")
+        raise ValueError("Invalid config path `" + os.path.abspath(configPath)+"`")
     if not os.path.exists(weightPath):
-        raise ValueError("Invalid weight path `" +
-                         os.path.abspath(weightPath)+"`")
+        raise ValueError("Invalid weight path `" + os.path.abspath(weightPath)+"`")
     if not os.path.exists(metaPath):
-        raise ValueError("Invalid data file path `" +
-                         os.path.abspath(metaPath)+"`")
+        raise ValueError("Invalid data file path `" + os.path.abspath(metaPath)+"`")
     if netMain is None:
         netMain = darknet.load_net_custom(configPath.encode(
             "ascii"), weightPath.encode("ascii"), 0, 1)  # batch size = 1
@@ -64,8 +60,7 @@ def YOLO():
             with open(metaPath) as metaFH:
                 metaContents = metaFH.read()
                 import re
-                match = re.search("names *= *(.*)$", metaContents,
-                                  re.IGNORECASE | re.MULTILINE)
+                match = re.search("names *= *(.*)$", metaContents, re.IGNORECASE | re.MULTILINE)
                 if match:
                     result = match.group(1)
                 else:
@@ -79,8 +74,8 @@ def YOLO():
                     pass
         except Exception:
             pass
-    #cap = cv2.VideoCapture(0)
-    cap = cv2.VideoCapture("test.mp4")
+    cap = cv2.VideoCapture(0)
+    # cap = cv2.VideoCapture("test.mp4")
     cap.set(3, 1280)
     cap.set(4, 720)
     out = cv2.VideoWriter(
