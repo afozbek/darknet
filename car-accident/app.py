@@ -4,8 +4,13 @@ import argparse
 
 # SIMPLE IMAGE
 # ./darknet detector test cfg/coco.data cfg/yolov3.cfg yolov3.weights data/dog.jpg
-# REAL TIME
+
+# REAL TIME YOLO
 # ./darknet detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights
+
+# REAL TIME YOLO MIN
+# ./darknet detector demo cfg/coco.data cfg/yolov3-tiny.cfg bin/yolov3-tiny.weights
+
 # VIDEO FILE
 # ./darknet detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights <video file>
 
