@@ -445,7 +445,7 @@ def performDetect(
                 draw.set_color(image, (rr4, cc4), boxColor, alpha= 0.8)
                 draw.set_color(image, (rr5, cc5), boxColor, alpha= 0.8)
             if not makeImageOnly:
-                cv2.imshow("frame", image)
+                cv2.imshow("frame", cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
                 cv2.waitKey(0)
                 # io.imshow(image)
                 # io.show()
@@ -459,4 +459,10 @@ def performDetect(
     return detections
 
 if __name__ == "__main__":
-    performDetect()
+    predictions = performDetect(showImage=False)
+    
+    for result in predictions:
+        label, confidence, coordinates = result
+        print("IMAGE LABEL:", label)
+        print("IMAGE CONFIDENCE:", confidence)
+        print("IMAGE COORDINATES:", coordinates)
