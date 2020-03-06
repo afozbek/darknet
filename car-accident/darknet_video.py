@@ -102,7 +102,11 @@ def YOLO():
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         print(1/(time.time()-prev_time))
         cv2.imshow('Demo', image)
-        cv2.waitKey(3)
+
+        k = cv2.waitKey(2) & 0xFF
+        if k == 27 or k == ord('q'):
+            break
+    cv2.destroyAllWindows()
     cap.release()
     out.release()
 
