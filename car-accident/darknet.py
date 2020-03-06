@@ -33,7 +33,6 @@ import random
 import os
 import cv2
 
-print(cv2.__version__)
 DARKNET_FORCE_CPU=False
 FORCE_CPU=False
 
@@ -460,7 +459,7 @@ def performDetect(
 
 if __name__ == "__main__":
     predictions = performDetect(showImage=False)
-    
+
     for result in predictions:
         label, confidence, coordinates = result
         print("IMAGE LABEL:", label)
